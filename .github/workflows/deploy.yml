@@ -1,0 +1,21 @@
+name: Deploy to GitHub Pages
+on:
+   push:
+     branches:
+        - dep-inclusions
+   workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: writer
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@4
+      - name: Detect package manager
+        id: detect-package-manager
